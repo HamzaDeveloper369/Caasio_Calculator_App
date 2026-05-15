@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>History - Advanced Casio Scientific Calculator</title>
+    <meta name="description" content="A professional-grade, interactive Casio-style scientific calculator with advanced math functions.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-btn">Calculator</a>
+        <a href="history.html" class="nav-btn active">History</a>
+        <a href="functions.html" class="nav-btn">Functions</a>
+        <a href="maker.html" class="nav-btn">Owners Details</a>
+    </nav>
+
+    <div class="app-container">
+        <!-- History Section -->
+        <section class="app-section active">
+            <div class="section-container">
+                <h2>Calculation History</h2>
+                <div class="history-list-full" id="history-list-full">
+                    <!-- History items will be injected here -->
+                </div>
+                <button class="clear-history-btn" id="clear-history-full">Clear All History</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        let audioCtx;
+        function playClickSound() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const oscillator = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(1000, audioCtx.currentTime);
+                oscillator.frequency.exponentialRampToValueAtTime(10, audioCtx.currentTime + 0.05);
+                gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                oscillator.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                oscillator.start();
+                oscillator.stop(audioCtx.currentTime + 0.05);
+            } catch (e) {
+                console.log("Audio not supported or disabled");
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const history = JSON.parse(localStorage.getItem('calc_history')) || [];
+            const fullList = document.getElementById('history-list-full');
+            
+            function renderHistory() {
+                fullList.innerHTML = '';
+                history.slice().reverse().forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'history-item';
+                    div.textContent = item;
+                    div.onclick = () => {
+                        playClickSound();
+                        const expr = item.split(' = ')[0];
+                        setTimeout(() => {
+                            window.location.href = 'index.html?expr=' + encodeURIComponent(expr);
+                        }, 50);
+                    };
+                    fullList.appendChild(div);
+                });
+            }
+
+            renderHistory();
+
+            document.getElementById('clear-history-full').onclick = () => {
+                playClickSound();
+                localStorage.removeItem('calc_history');
+                history.length = 0;
+                renderHistory();
+            };
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    playClickSound();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

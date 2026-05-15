@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Advanced Casio Scientific Calculator</title>
+    <meta name="description" content="A professional-grade, interactive Casio-style scientific calculator with advanced math functions.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="nav-btn active">Calculator</a>
+        <a href="history.html" class="nav-btn">History</a>
+        <a href="functions.html" class="nav-btn">Functions</a>
+        <a href="maker.html" class="nav-btn">Owners Details</a>
+    </nav>
+
+    <div class="app-container">
+        <!-- Calculator Section -->
+        <section id="calculator-section" class="app-section active">
+            <div class="calculator-container">
+                <main class="calculator" id="calculator-body">
+                    <div class="top-row">
+                        <div class="top-brand">CASIO <span>fx-991EX</span></div>
+                        <div class="solar-panel">
+                            <div class="solar-cell"></div>
+                            <div class="solar-cell"></div>
+                            <div class="solar-cell"></div>
+                            <div class="solar-cell"></div>
+                        </div>
+                    </div>
+                    <div class="display-container lcd-flicker">
+                        <div class="previous-equation" id="history-display"></div>
+                        <div class="current-display" id="main-display">0</div>
+                    </div>
+
+                    <div class="keypad">
+                        <!-- Row 1 -->
+                        <button class="btn btn-sci" data-func="shift">SHIFT</button>
+                        <button class="btn btn-sci" data-func="alpha">ALPHA</button>
+                        <button class="btn btn-sci" data-func="mode">MODE</button>
+                        <button class="btn btn-action" data-func="clear" id="btn-ac">AC</button>
+                        <button class="btn btn-action" data-func="delete" id="btn-del">DEL</button>
+
+                        <!-- Row 2 -->
+                        <button class="btn btn-sci" data-val="sin(">sin</button>
+                        <button class="btn btn-sci" data-val="cos(">cos</button>
+                        <button class="btn btn-sci" data-val="tan(">tan</button>
+                        <button class="btn btn-sci" data-val="^">x<sup>y</sup></button>
+                        <button class="btn btn-sci" data-val="log(">log</button>
+
+                        <!-- Row 3 -->
+                        <button class="btn btn-sci" data-val="pi">π</button>
+                        <button class="btn btn-sci" data-val="e">e</button>
+                        <button class="btn btn-sci" data-val="A">A</button>
+                        <button class="btn btn-sci" data-val="B">B</button>
+                        <button class="btn btn-sci" data-val="C">C</button>
+
+                        <!-- Row 4 -->
+                        <button class="btn btn-sci" data-val="asin(">sin⁻¹</button>
+                        <button class="btn btn-sci" data-val="acos(">cos⁻¹</button>
+                        <button class="btn btn-sci" data-val="atan(">tan⁻¹</button>
+                        <button class="btn btn-sci" data-val="sqrt(">√</button>
+                        <button class="btn btn-sci" data-val="ln(">ln</button>
+
+                        <!-- Row 5 -->
+                        <button class="btn btn-num" data-val="7">7</button>
+                        <button class="btn btn-num" data-val="8">8</button>
+                        <button class="btn btn-num" data-val="9">9</button>
+                        <button class="btn btn-sci" data-val="(">(</button>
+                        <button class="btn btn-sci" data-val=")">)</button>
+
+                        <!-- Row 6 -->
+                        <button class="btn btn-num" data-val="4">4</button>
+                        <button class="btn btn-num" data-val="5">5</button>
+                        <button class="btn btn-num" data-val="6">6</button>
+                        <button class="btn btn-op" data-val="*">×</button>
+                        <button class="btn btn-op" data-val="/">÷</button>
+
+                        <!-- Row 7 -->
+                        <button class="btn btn-num" data-val="1">1</button>
+                        <button class="btn btn-num" data-val="2">2</button>
+                        <button class="btn btn-num" data-val="3">3</button>
+                        <button class="btn btn-op" data-val="+">+</button>
+                        <button class="btn btn-op" data-val="-">-</button>
+
+                        <!-- Row 8 -->
+                        <button class="btn btn-num" data-val="0">0</button>
+                        <button class="btn btn-num" data-val=".">.</button>
+                        <button class="btn btn-equal" data-func="equal" id="btn-equal">=</button>
+                    </div>
+                </main>
+                <div class="status-bar">
+                    <span id="mode-indicator">COMP</span>
+                    <span id="unit-indicator">D</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
